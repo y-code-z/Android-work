@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    首页：三按钮菜单（实验步骤 5）
+    三个按钮分别跳转到：TextView 演示页 / EditText 演示页 / 动态编辑室。
+    三个按钮共用同一个样式（安卓绿圆角 + 白色机器人图标 + 白字粗体）。
+-->
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Android 控件属性演示"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:textColor="#333333"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.25" />
+
+    <TextView
+        android:id="@+id/subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="点下面的按钮进入对应演示页"
+        android:textSize="13sp"
+        android:textColor="#888888"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title" />
+
+    <!-- 按钮①：TextView 演示页
+         注意：用了自定义背景 bg_btn_green，必须配 app:backgroundTint="@null"，
+               否则 Material 按钮的主题色会把绿色盖掉 -->
+    <Button
+        android:id="@+id/btn_open_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="① TextView 演示页"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:background="@drawable/bg_btn_green"
+        app:backgroundTint="@null"
+        app:icon="@drawable/ic_android"
+        app:iconGravity="textStart"
+        app:iconPadding="10dp"
+        app:iconTint="#FFFFFF"
+        android:layout_marginTop="28dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/subtitle" />
+
+    <!-- 按钮②：EditText 演示页 -->
+    <Button
+        android:id="@+id/btn_open_edittext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="② EditText 演示页"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:background="@drawable/bg_btn_green"
+        app:backgroundTint="@null"
+        app:icon="@drawable/ic_android"
+        app:iconGravity="textStart"
+        app:iconPadding="10dp"
+        app:iconTint="#FFFFFF"
+        android:layout_marginTop="14dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_open_textview" />
+
+    <!-- 按钮③：动态编辑室 -->
+    <Button
+        android:id="@+id/btn_open_editor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="③ 动态编辑室"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:background="@drawable/bg_btn_green"
+        app:backgroundTint="@null"
+        app:icon="@drawable/ic_android"
+        app:iconGravity="textStart"
+        app:iconPadding="10dp"
+        app:iconTint="#FFFFFF"
+        android:layout_marginTop="14dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_open_edittext" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

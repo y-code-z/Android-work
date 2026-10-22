@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    页面③：动态编辑室（实验步骤 4，25 分）
+    布局思路（对应题目"上半屏 EditText、下半屏 ScrollView 工具栏"）：
+      根布局是竖直 LinearLayout，高度占满整屏；
+      上半部分（weight=1）放"被改造"的预览 EditText，固定可见；
+      下半部分（weight=1）用 ScrollView 包住所有工具栏控件，内容多时能滚动。
+    下半屏所有操作（滑块/下拉/勾选/按钮）→ Java 里用 setXxx() 实时改上方 EditText。
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#F0F2F5">
+
+    <!-- ============ 上半屏：预览区（下面所有操作都是改这个 EditText） ============ -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:padding="16dp">
+
+        <LinearLayout style="@style/Card">
+            <TextView style="@style/Tip"
+                android:text="预览区（上方是示例文本，下面拖滑块/选下拉/勾选，它的样子会实时变）" />
+            <!-- 被改造的 EditText：预填示例文本，所有动态修改都作用在它身上 -->
+            <EditText
+                android:id="@+id/et_target"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="我是被改造的输入框"
+                android:text="Android 动态属性演示：拖动下面的滑块，这个框会实时变化。"
+                android:textSize="16sp"
+                android:gravity="start" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- ============ 下半屏：ScrollView 包住工具栏 ============ -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- ===== 卡片 1：字号（SeekBar 实时改 setTextSize） ===== -->
+            <LinearLayout style="@style/Card">
+                <TextView style="@style/Tip"
+                    android:text="① 字号：拖动滑块实时改变（题目要求实时改 setTextSize）" />
+                <TextView
+                    android:id="@+id/tv_size"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="字号：16sp"
+                    android:textSize="13sp"
+                    android:textColor="#333333" />
+                <SeekBar
+                    android:id="@+id/sb_size"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:max="40"
+                    android:min="10"
+                    android:progress="16" />
+            </LinearLayout>
+
+            <!-- ===== 卡片 2：行数 lines（SeekBar → setLines） ===== -->
+            <LinearLayout style="@style/Card">
+                <TextView style="@style/Tip"
+                    android:text="③ 行数 lines：控制 EditText 至少/至多显示几行（setLines）" />
+                <TextView
+                    android:id="@+id/tv_lines"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="行数(lines)：2"
+                    android:textSize="13sp"
+                    android:textColor="#333333" />
+                <SeekBar
+                    android:id="@+id/sb_lines"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:max="10"
+                    android:min="1"
+                    android:progress="2" />
+            </LinearLayout>
+
+            <!-- ===== 卡片 3：最大行数 maxLines（SeekBar → setMaxLines） ===== -->
+            <LinearLayout style="@style/Card">
+                <TextView style="@style/Tip"
+                    android:text="③ 最大行数 maxLines：文字超过这么多行就滚动（setMaxLines）" />
+                <TextView
+                    android:id="@+id/tv_maxlines"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="最大行数(maxLines)：10"
+                    android:textSize="13sp"
+                    android:textColor="#333333" />
+                <SeekBar
+                    android:id="@+id/sb_maxlines"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:max="10"
+                    android:min="1"
+                    android:progress="10" />
+            </LinearLayout>
+
+            <!-- ===== 卡片 4：行间距 lineSpacingExtra（SeekBar → setLineSpacing） ===== -->
+            <LinearLayout style="@style/Card">
+                <TextView style="@style/Tip"
+                    android:text="③ 行间距 lineSpacingExtra：每行之间的额外间距（setLineSpacing，单位 dp）" />
+                <TextView
+                    android:id="@+id/tv_spacing"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="行距：4dp"
+                    android:textSize="13sp"
+                    android:textColor="#333333" />
+                <SeekBar
+                    android:id="@+id/sb_spacing"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:max="24"
+                    android:progress="4" />
+            </LinearLayout>
+
+            <!-- ===== 卡片 5：内边距 padding（SeekBar → setPadding） ===== -->
+            <LinearLayout style="@style/Card">
+                <TextView style="@style/Tip"
+                    android:text="③ 内边距 padding：文字与框边缘的距离（setPadding）" />
+                <TextView
+                    android:id="@+id/tv_padding"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="内边距(padding)：8dp"
+                    android:textSize="13sp"
+                    android:textColor="#333333" />
+                <SeekBar
+                    android:id="@+id/sb_padding"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:max="40"
+                    android:progress="8" />
+            </LinearLayout>
+
+            <!-- ===== 卡片 6：外边距 margin（SeekBar → LayoutParams.setMargins） ===== -->
+            <LinearLayout style="@style/Card">
+                <TextView style="@style/Tip"
+                    android:text="③ 外边距 margin：框与父容器边缘的距离（控件没有 setMargin，必须改 LayoutParams）" />
+                <TextView
+                    android:id="@+id/tv_margin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="外边距(margin)：8dp"
+                    android:textSize="13sp"
+                    android:textColor="#333333" />
+                <SeekBar
+                    android:id="@+id/sb_margin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:max="40"
+                    android:progress="8" />
+            </LinearLayout>
+
+            <!-- ===== 卡片 7：下拉框（文字颜色 / 背景颜色 / 对齐方式 / 输入类型） ===== -->
+            <LinearLayout style="@style/Card">
+                <TextView style="@style/Tip"
+                    android:text="② 下拉框：文字颜色 / 背景颜色 / 对齐方式 / 输入类型" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="文字颜色"
+                    android:textSize="13sp"
+                    android:textColor="#333333" />
+                <Spinner
+                    android:id="@+id/sp_color"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/color_names" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="背景颜色"
+                    android:textSize="13sp"
+                    android:textColor="#333333"
+                    android:layout_marginTop="8dp" />
+                <Spinner
+                    android:id="@+id/sp_bg"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/bg_color_names" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="对齐方式"
+                    android:textSize="13sp"
+                    android:textColor="#333333"
+                    android:layout_marginTop="8dp" />
+                <Spinner
+                    android:id="@+id/sp_gravity"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/gravity_names" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="输入类型"
+                    android:textSize="13sp"
+                    android:textColor="#333333"
+                    android:layout_marginTop="8dp" />
+                <Spinner
+                    android:id="@+id/sp_input_type"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/input_type_names" />
+            </LinearLayout>
+
+            <!-- ===== 卡片 8：复选框（加粗 / 倾斜 / 全大写 / 可编辑） ===== -->
+            <LinearLayout style="@style/Card">
+                <TextView style="@style/Tip"
+                    android:text="④ 复选框：勾选即生效，取消即还原（加粗/倾斜→textStyle，全大写→textAllCaps，可编辑→focusable）" />
+                <CheckBox
+                    android:id="@+id/cb_bold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="加粗" />
+                <CheckBox
+                    android:id="@+id/cb_italic"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="倾斜" />
+                <CheckBox
+                    android:id="@+id/cb_allcaps"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="字母全部大写 (textAllCaps)" />
+                <CheckBox
+                    android:id="@+id/cb_editable"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="允许编辑" />
+            </LinearLayout>
+
+            <!-- ===== 卡片 9：动态设置 hint（输入框 + 按钮） ===== -->
+            <LinearLayout style="@style/Card">
+                <TextView style="@style/Tip"
+                    android:text="⑤ 动态设置 hint：在输入框里写字，点按钮让预览框的提示文字立即变成它" />
+                <EditText
+                    android:id="@+id/et_hint_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="输入新的提示文字"
+                    android:inputType="text" />
+                <Button
+                    android:id="@+id/btn_set_hint"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="设置提示文字" />
+            </LinearLayout>
+
+            <!-- ===== 卡片 10：三个功能按钮 ===== -->
+            <LinearLayout style="@style/Card">
+                <TextView style="@style/Tip"
+                    android:text="功能按钮：清空内容 / 恢复默认文字 / 全部还原（滑块、下拉、勾选都复位）" />
+                <Button
+                    android:id="@+id/btn_clear"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="清空内容" />
+                <Button
+                    android:id="@+id/btn_restore_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="恢复默认文字" />
+                <Button
+                    android:id="@+id/btn_reset_all"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="全部还原" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

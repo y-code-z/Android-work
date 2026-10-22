@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 绿色圆角按钮背景：Android 品牌绿 #3DDC84，四角圆角 12dp -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <!-- 填充色：安卓绿 -->
+    <solid android:color="#3DDC84" />
+    <!-- 圆角半径：四个角都圆 12dp -->
+    <corners android:radius="12dp" />
+</shape>

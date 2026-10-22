@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 动态编辑室里三个 Spinner（下拉框）的选项文字 -->
+<resources>
+
+    <!-- 文字颜色选项 -->
+    <string-array name="color_names">
+        <item>黑色</item>
+        <item>红色</item>
+        <item>安卓绿</item>
+        <item>蓝色</item>
+    </string-array>
+
+    <!-- 文字对齐方式选项 -->
+    <string-array name="gravity_names">
+        <item>左对齐</item>
+        <item>居中</item>
+        <item>右对齐</item>
+    </string-array>
+
+    <!-- 输入类型选项 -->
+    <string-array name="input_type_names">
+        <item>普通文本</item>
+        <item>密码</item>
+        <item>电话</item>
+        <item>数字</item>
+    </string-array>
+
+    <!-- 背景颜色选项（动态编辑室新增） -->
+    <string-array name="bg_color_names">
+        <item>白色</item>
+        <item>浅黄</item>
+        <item>浅绿</item>
+        <item>浅蓝</item>
+        <item>浅灰</item>
+    </string-array>
+
+</resources>

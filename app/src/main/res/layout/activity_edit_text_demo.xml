@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    EditText 演示页布局（实验步骤 3）
+    结构与 TextView 演示页一致：ScrollView 包多个白色卡片，每个卡片演示一个属性。
+    ⚠ 重要：本页全部使用"新写法"（inputType），老写法见各卡片注释。
+-->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F0F2F5">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- 页面大标题 -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="EditText 属性演示"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="16dp" />
+
+        <!-- ===== 卡片 1：hint + textColorHint ===== -->
+        <!-- hint = 提示文字：输入框为空时显示的灰色引导语，用户一开始输入就自动消失 -->
+        <LinearLayout style="@style/Card">
+            <TextView style="@style/Tip" android:text="① hint 提示文字 + textColorHint 提示文字颜色" />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="请输入用户名"
+                android:textColorHint="#FF5722" />
+            <!-- textColorHint 单独演示：把提示语染成橙色，方便和卡片2的默认灰色对比 -->
+            <TextView style="@style/Tip" android:text="↑ textColorHint 设为橙色；下面这个是默认灰色，对比看" />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="请输入密码（默认灰色提示）" />
+        </LinearLayout>
+
+        <!-- ===== 卡片 2：inputType="textPassword" ===== -->
+        <!-- 新写法：android:inputType="textPassword"（推荐）
+             老写法：android:password="true"（已废弃，新版失效，照抄会画删除线） -->
+        <LinearLayout style="@style/Card">
+            <TextView style="@style/Tip" android:text="② 密码框：inputType=&quot;textPassword&quot;（老写法 password=true 已废弃）" />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:hint="请输入密码" />
+        </LinearLayout>
+
+        <!-- ===== 卡片 3：inputType="phone" ===== -->
+        <!-- 新写法：android:inputType="phone"（推荐）
+             老写法：android:phoneNumber="true"（已废弃）
+             设为 phone 后软键盘自动切换成数字拨号键盘 -->
+        <LinearLayout style="@style/Card">
+            <TextView style="@style/Tip" android:text="③ 电话框：inputType=&quot;phone&quot;（老写法 phoneNumber=true 已废弃），键盘变数字盘" />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="phone"
+                android:hint="请输入手机号" />
+        </LinearLayout>
+
+        <!-- ===== 卡片 4：minLines ===== -->
+        <!-- minLines=3：输入框最少占 3 行高（没内容也撑高），视觉上提示"这里可以多行输入" -->
+        <LinearLayout style="@style/Card">
+            <TextView style="@style/Tip" android:text="④ minLines=3：输入框最少显示 3 行高" />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minLines="3"
+                android:gravity="top"
+                android:hint="请输入自我介绍（至少 3 行高）" />
+            <!-- gravity="top"：多行时光标/文字从顶部开始，而不是垂直居中 -->
+        </LinearLayout>
+
+        <!-- ===== 卡片 5：文字超出宽度自动横向滚动 ===== -->
+        <!-- 新版本（新写法）：什么都不用设置！EditText 默认就支持超宽文字横向滚动
+             老写法：android:scrollHorizontally="true"（已废弃，无需再写）
+             在右侧文本框末尾继续打字，光标会带着文字自动往左滚 -->
+        <LinearLayout style="@style/Card">
+            <TextView style="@style/Tip" android:text="⑤ 横向滚动：新版无需任何属性（老写法 scrollHorizontally 已废弃），点进去接着打字看效果" />
+            <EditText
+                android:id="@+id/et_scroll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:text="这是一段特别长的文字，一直打字超出输入框宽度之后就会自动横向滚动过去" />
+        </LinearLayout>
+
+        <!-- ===== 卡片 6：不可编辑的输入框 ===== -->
+        <!-- 新写法：android:inputType="none"（推荐）
+             老写法：android:editable="false"（已废弃，高版本直接失效）
+             效果：能显示预置文字、能长按选择复制，但弹不出键盘、改不了内容 -->
+        <LinearLayout style="@style/Card">
+            <TextView style="@style/Tip" android:text="⑥ 不可编辑：inputType=&quot;none&quot;（老写法 editable=false 已废弃）" />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="none"
+                android:text="我是只读内容，点我也改不了" />
+        </LinearLayout>
+
+        <!-- ===== 卡片 7：综合案例 —— 读内容 + Toast ===== -->
+        <!-- 步骤：①输入文字 ②点按钮 ③Java 里 getText().toString() 拿到内容 ④Toast 弹出显示 -->
+        <LinearLayout style="@style/Card">
+            <TextView style="@style/Tip" android:text="⑦ 综合案例：输入内容 → 点按钮 → Toast 弹出你输入的文字" />
+            <EditText
+                android:id="@+id/et_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="在这里随便输入点什么" />
+            <Button
+                android:id="@+id/btn_show"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="读取并显示我输入的内容" />
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>
